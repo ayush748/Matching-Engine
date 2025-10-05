@@ -1,0 +1,46 @@
+D:\matching_engine\node_server\node_modules\bindings\bindings.js:135
+  throw err;
+  ^
+
+Error: Could not locate the bindings file. Tried:
+ → D:\matching_engine\node_server\build\binding.node
+ → D:\matching_engine\node_server\build\Debug\binding.node
+ → D:\matching_engine\node_server\build\Release\binding.node
+ → D:\matching_engine\node_server\out\Debug\binding.node
+ → D:\matching_engine\node_server\Debug\binding.node
+ → D:\matching_engine\node_server\out\Release\binding.node
+ → D:\matching_engine\node_server\Release\binding.node
+ → D:\matching_engine\node_server\build\default\binding.node
+ → D:\matching_engine\node_server\compiled\22.19.0\win32\x64\binding.node
+ → D:\matching_engine\node_server\addon-build\release\install-root\binding.node
+ → D:\matching_engine\node_server\addon-build\debug\install-root\binding.node
+ → D:\matching_engine\node_server\addon-build\default\install-root\binding.node
+ → D:\matching_engine\node_server\lib\binding\node-v127-win32-x64\binding.node
+    at bindings (D:\matching_engine\node_server\node_modules\bindings\bindings.js:126:9)
+    at Object.<anonymous> (D:\matching_engine\node_server\index.js:3:36)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  tries: [
+    'D:\\matching_engine\\node_server\\build\\binding.node',
+    'D:\\matching_engine\\node_server\\build\\Debug\\binding.node',
+    'D:\\matching_engine\\node_server\\build\\Release\\binding.node',
+    'D:\\matching_engine\\node_server\\out\\Debug\\binding.node',
+    'D:\\matching_engine\\node_server\\Debug\\binding.node',
+    'D:\\matching_engine\\node_server\\out\\Release\\binding.node',
+    'D:\\matching_engine\\node_server\\Release\\binding.node',
+    'D:\\matching_engine\\node_server\\build\\default\\binding.node',
+    'D:\\matching_engine\\node_server\\compiled\\22.19.0\\win32\\x64\\binding.node',
+    'D:\\matching_engine\\node_server\\addon-build\\release\\install-root\\binding.node',
+    'D:\\matching_engine\\node_server\\addon-build\\debug\\install-root\\binding.node',
+    'D:\\matching_engine\\node_server\\addon-build\\default\\install-root\\binding.node',
+    'D:\\matching_engine\\node_server\\lib\\binding\\node-v127-win32-x64\\binding.node'
+  ]
+}
+
+Node.js v22.19.0
