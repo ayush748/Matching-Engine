@@ -18,7 +18,8 @@ The system follows a **three-layer architecture**: the **Frontend**, **Python We
 - 🖥️ **Frontend** — Provides an order form to place buy/sell orders, specifying price, quantity, and order type.  
 - 🧩 **Python Layer (FastAPI + asyncio)** — Manages client connections, validates incoming JSON orders, and relays them to the C++ engine. It also broadcasts trade confirmations and order book updates to all connected clients.  
 - ⚙️ **C++ Core Matching Engine** — Maintains bid and ask books for active orders. Orders are matched using strict **price-time priority** (better price and earlier timestamp get executed first). The entire loop from submission to confirmation occurs within milliseconds.
-  ![Uploading image.png…]()
+![WhatsApp Image 2025-10-08 at 16 34 50_eb90e266](https://github.com/user-attachments/assets/e641b374-c8c4-40b9-8e20-15b044f145a5)
+
 
 
 ---
