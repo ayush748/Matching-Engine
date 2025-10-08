@@ -17,7 +17,43 @@ The **Python layer**, built with **FastAPI** and **asyncio**, serves as the comm
 
 The **C++ Core Matching Engine** is the computational heart of the system. It maintains bid and ask books for active buy and sell orders. Orders are matched using strict price-time priority—better prices and earlier timestamps execute first. The entire loop, from order submission to confirmation, occurs in milliseconds.
 
+
 ---
+
+## ⚙️ Core Functionality
+
+### 🧩 C++ Core Engine  
+The **C++ core** processes all orders and maintains the order book. When buy and sell orders match, a trade is generated and executed immediately. All activity is logged via `logger.hpp`, and state changes are saved by `persistence.hpp` to preserve data consistency. The authentication module ensures that users are validated before interacting with the market.
+
+### 🐍 Python WebSocket Server  
+The **Python server** acts as a real-time data bridge. Built with **FastAPI** and **asyncio**, it can handle multiple concurrent clients simultaneously. It receives JSON orders, forwards them to the C++ engine, and pushes updates like executed trades, bid/ask changes, and user confirmations back to clients instantly.
+
+### 💻 Frontend Dashboard  
+The **frontend** (HTML + JS) provides an interactive, responsive dashboard. It connects automatically to the WebSocket endpoint, allowing users to submit buy/sell orders, view live trades, and monitor the current market depth. The interface updates in real time, mirroring professional trading platforms.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+You’ll need the following tools installed:
+- A C++ compiler (e.g., GCC or Clang)
+- CMake (v3.10+)
+- Python 3.8+ and Pip
+- Node.js and NPM (for optional Node server)
+
+### Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/matching-engine.git
+   cd matching-engine
+mkdir build
+cd build
+cmake ..
+make
+cd ..
+
 
 ## 🧩 System Architecture
 
