@@ -34,7 +34,8 @@ Built using **FastAPI** and **asyncio**, the Python layer serves as a **real-tim
 It:
 - Accepts JSON orders from clients  
 - Forwards them to the C++ core  
-- Sends real-time updates (trades, bids, asks, confirmations) to all connected clients  
+- Sends real-time updates (trades, bids, asks, confirmations) to all connected clients
+  
 
 ### 💻 Frontend Dashboard
 The **HTML + JS dashboard** provides a clean and responsive interface:  
@@ -113,7 +114,8 @@ It includes:
 
 The server console shows all incoming WebSocket events and responses, confirming successful connections and order submissions. Each log line includes order details like side, type, and execution results.
 
-(You can include a sample image, e.g.:)
+![WhatsApp Image 2025-10-08 at 15 03 56_28d3b10f](https://github.com/user-attachments/assets/38045596-0a93-4679-8b3f-027d58c7a764)
+
 
 
 ### 3. API Submission (via Postman)
