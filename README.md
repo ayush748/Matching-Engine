@@ -1,4 +1,4 @@
-# ⚡ Multi-Language Matching Engine
+# ⚡Matching Engine
 
 The **Multi-Language Matching Engine** is a high-performance trading system that simulates the internal operations of a modern financial exchange. It processes buy and sell orders in real time using a powerful hybrid stack of **C++**, **Python**, and **JavaScript**.
 
