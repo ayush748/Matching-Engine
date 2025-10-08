@@ -139,7 +139,8 @@ Payload:
 }
 
 ```
-(Sample image placeholder:)
+![WhatsApp Image 2025-10-08 at 15 03 22_15ccb45b](https://github.com/user-attachments/assets/057e8f0a-97a2-42f2-adde-3a37aaa2deba)
+
 
 
 ### 🧱 File Structure
