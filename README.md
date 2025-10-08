@@ -141,35 +141,55 @@ Payload:
 
 
 ### 🧱 File Structure
+```bash
 📦 matching-engine/
-│
-├── 📁 .vscode/             → VS Code configuration files
-├── 📁 build/               → Compiled binaries and build output
-│
-├── 📁 include/             → Header files for C++ core
-│   ├── logger.hpp          → Logging utility
-│   ├── matching_engine.hpp → Core engine interface
-│   ├── order_book.hpp      → Order book management
-│   └── ...
-│
-├── 📁 src/                 → C++ source files
-│   ├── main.cpp            → Engine entry point
-│   ├── matching_engine.cpp → Matching algorithm logic
-│   └── ...
-│
-├── 📁 python_server/       → WebSocket backend
-│   ├── server.py           → FastAPI + WebSocket server
-│   └── requirements.txt    → Python dependencies
-│
-├── 📁 node_server/         → Frontend + optional Node integration
-│   ├── public/index.html   → User dashboard
-│   ├── package.json        → NPM setup
-│   └── ...
-│
-├── 📄 CMakeLists.txt       → Build config for C++
-└── 📄 matching_engine.exe  → Compiled binary
+
+📁 build
+
+📁 include
+├─ 📄 json.hpp
+├─ 📄 logger.hpp
+├─ 📄 matching_engine.hpp
+├─ 📄 order_book.hpp
+├─ 📄 order.hpp
+├─ 📄 persistence.hpp
+├─ 📄 trade.hpp
+└─ 📄 utils.hpp
+
+📁 node_server
+├─ 📁 build
+├─ 📁 node_modules
+├─ 📁 public
+│  └─ 📄 index.html
+├─ 📄 binding.ccp
+├─ 📄 binding.gyp
+├─ 📄 index.js
+├─ 📄 package-lock.json
+├─ 📄 package.json
+├─ 📄 README.md
+├─ 📄 server-err.log
+└─ 📄 server-out.log
+
+📁 python_server
+├─ 📁 __pycache__
+├─ 📁 static
+├─ 📄 requirements.txt
+└─ 📄 server.py
+
+📁 src
+├─ 📄 main.cpp
+├─ 📄 matching_engine.cpp
+├─ 📄 order_book.cpp
+├─ 📄 order.cpp
+├─ 📄 persistence.cpp
+├─ 📄 trade.cpp
+
+📄 CMakeLists.txt
+📄 matching_engine.exe
+📄 package-lock.json
 
 
+```
 ### ⚡ Performance and Design Philosophy
 
 This matching engine is designed for low latency, modularity, and real-time responsiveness. The C++ core ensures lightning-fast trade matching, while Python manages scalability and concurrent data flow. The web interface offers accessibility and live visualization.
