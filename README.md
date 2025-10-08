@@ -199,13 +199,9 @@ By combining C++ for performance, Python for orchestration, and JavaScript for u
 ### 🧭 Future Vision
 
 Expand into a multi-threaded distributed engine.
-
 Integrate database persistence for order and trade history.
-
 Add graphical analytics (candlestick charts, market depth graphs).
-
 Support advanced order types (Iceberg, Trailing Stop, Conditional Orders).
-
 Upgrade Python into a hybrid REST + WebSocket API system.
 
 
