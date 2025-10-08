@@ -2,78 +2,190 @@
 
 The **Multi-Language Matching Engine** is a high-performance trading system that simulates the internal operations of a modern financial exchange. It processes buy and sell orders in real time using a powerful hybrid stack of **C++**, **Python**, and **JavaScript**.
 
-Each component is written in the language best suited for its role. **C++** handles performance-critical logic, including the matching algorithm, trade persistence, and authentication. **Python** acts as a WebSocket bridge between the backend and frontend, enabling real-time data streaming. **JavaScript and HTML** provide a clean, interactive web interface for users to submit and monitor orders.  
+Each component is written in the language best suited for its role:  
+- **C++** handles performance-critical logic — the matching algorithm, trade persistence, and authentication.  
+- **Python** acts as a **WebSocket bridge** between the backend and frontend, enabling real-time data streaming.  
+- **JavaScript + HTML** provide an interactive web interface for users to submit and monitor orders.  
 
-The primary goal of this project is to demonstrate how multiple languages can form a cohesive architecture that achieves both high speed and user interactivity. It makes the complex reality of financial trading systems accessible, educational, and modular for future development.
+The primary goal of this project is to demonstrate how multiple languages can form a cohesive architecture that achieves both **high speed** and **user interactivity** — making the complex reality of financial trading systems **accessible**, **educational**, and **modular**.
 
 ---
 
 ## 🧠 System Overview
 
-The system follows a **three-layer architecture**: the frontend, a Python WebSocket bridge, and a C++ backend.  
-The **frontend** serves as the user’s entry point with an order form to place buy or sell orders, specifying price, quantity, and order type.  
+The system follows a **three-layer architecture**: the **Frontend**, **Python WebSocket Bridge**, and **C++ Core Engine**.
 
-The **Python layer**, built with **FastAPI** and **asyncio**, serves as the communication hub. It manages client connections, validates incoming JSON orders, and relays them to the C++ engine. When the engine processes an order, this layer broadcasts the result (like trade confirmations and order book updates) to all connected clients.  
-
-The **C++ Core Matching Engine** is the computational heart of the system. It maintains bid and ask books for active buy and sell orders. Orders are matched using strict price-time priority—better prices and earlier timestamps execute first. The entire loop, from order submission to confirmation, occurs in milliseconds.
-
+- 🖥️ **Frontend** — Provides an order form to place buy/sell orders, specifying price, quantity, and order type.  
+- 🧩 **Python Layer (FastAPI + asyncio)** — Manages client connections, validates incoming JSON orders, and relays them to the C++ engine. It also broadcasts trade confirmations and order book updates to all connected clients.  
+- ⚙️ **C++ Core Matching Engine** — Maintains bid and ask books for active orders. Orders are matched using strict **price-time priority** (better price and earlier timestamp get executed first). The entire loop from submission to confirmation occurs within milliseconds.
 
 ---
 
 ## ⚙️ Core Functionality
 
-### 🧩 C++ Core Engine  
-The **C++ core** processes all orders and maintains the order book. When buy and sell orders match, a trade is generated and executed immediately. All activity is logged via `logger.hpp`, and state changes are saved by `persistence.hpp` to preserve data consistency. The authentication module ensures that users are validated before interacting with the market.
+### 🧩 C++ Core Engine
+The **C++ Core** processes all orders and maintains the order book. When buy and sell orders match, a trade is generated and executed immediately.  
+- Logging handled via `logger.hpp`  
+- State persistence handled by `persistence.hpp`  
+- Secure authentication for users before interaction with the market  
 
-### 🐍 Python WebSocket Server  
-The **Python server** acts as a real-time data bridge. Built with **FastAPI** and **asyncio**, it can handle multiple concurrent clients simultaneously. It receives JSON orders, forwards them to the C++ engine, and pushes updates like executed trades, bid/ask changes, and user confirmations back to clients instantly.
+### 🐍 Python WebSocket Server
+Built using **FastAPI** and **asyncio**, the Python layer serves as a **real-time data bridge**.  
+It:
+- Accepts JSON orders from clients  
+- Forwards them to the C++ core  
+- Sends real-time updates (trades, bids, asks, confirmations) to all connected clients  
 
-### 💻 Frontend Dashboard  
-The **frontend** (HTML + JS) provides an interactive, responsive dashboard. It connects automatically to the WebSocket endpoint, allowing users to submit buy/sell orders, view live trades, and monitor the current market depth. The interface updates in real time, mirroring professional trading platforms.
+### 💻 Frontend Dashboard
+The **HTML + JS dashboard** provides a clean and responsive interface:  
+- Submit buy/sell orders  
+- View live trades and market depth  
+- Updates automatically in real-time through WebSocket connections  
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
-You’ll need the following tools installed:
-- A C++ compiler (e.g., GCC or Clang)
-- CMake (v3.10+)
-- Python 3.8+ and Pip
-- Node.js and NPM (for optional Node server)
+### 🧰 Prerequisites
+Ensure the following are installed:
+- A **C++ compiler** (e.g., GCC or Clang)  
+- **CMake** (v3.10 or higher)  
+- **Python 3.8+** and **Pip**  
+- **Node.js** and **NPM** *(optional for Node server)*  
 
-### Installation Steps
+---
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/matching-engine.git
-   cd matching-engine
-# 🚀 Build the C++ Core Engine
+### 🏗️ Installation Steps
+
+#### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/your-username/matching-engine.git
+cd matching-engine
+
+```
+
+### 🏗️ Build the C++ Core Engine
+```bash
 mkdir build
 cd build
 cmake ..
 make
 cd ..
+```
 
-# 🧠 Set up the Python WebSocket Server
+
+
+### 🏗️ Set up the Python WebSocket Server
+```bash
 cd python_server
 pip install -r requirements.txt
+```
 
-# ⚙️ Run the Application
 
-# 1️⃣ Start the C++ Engine
+### 🏗️ Set up the Python WebSocket Server
+```bash
+- Start the C++ Engine:
+
 ./build/matching_engine
 
-# 2️⃣ Start the Python Server
+
+- Start the Python Server:
+
 python python_server/server.py
+```
 
-# 3️⃣ Launch the Frontend
-# Open the following file in your web browser:
-node_server/public/index.html
+### 📈 Usage
+ #### 1. Frontend Dashboard
+
+The index.html dashboard provides an interactive UI for placing and tracking orders.
+It includes:
+
+- BBO (Best Bid Offer): Shows the best buy/sell prices in real time.
+
+- Place Order: Submit buy or sell orders with price and quantity inputs.
+
+- Recent Trades: Displays executed trade history with price, volume, and direction.
+
+(You can include a screenshot here, e.g.:)
 
 
+#### 2. Python WebSocket Server Logs
 
-## 🧩 System Architecture
+The server console shows all incoming WebSocket events and responses, confirming successful connections and order submissions. Each log line includes order details like side, type, and execution results.
 
-This ASCII-style diagram shows the real-time data flow across the system, representing how frontend actions reach the backend engine and return live updates.
+(You can include a sample image, e.g.:)
+
+
+### 3. API Submission (via Postman)
+
+Orders can also be placed directly via HTTP POST requests.
+Example endpoint:
+
+```bash
+
+POST http://127.0.0.1:5600/submit_order
+```
+
+``` bash
+Payload:
+
+{
+  "symbol": "AAPL",
+  "side": "BUY",
+  "price": 150.25,
+  "quantity": 100
+}
+
+```
+(Sample image placeholder:)
+
+
+### 🧱 File Structure
+📦 matching-engine/
+│
+├── 📁 .vscode/             → VS Code configuration files
+├── 📁 build/               → Compiled binaries and build output
+│
+├── 📁 include/             → Header files for C++ core
+│   ├── logger.hpp          → Logging utility
+│   ├── matching_engine.hpp → Core engine interface
+│   ├── order_book.hpp      → Order book management
+│   └── ...
+│
+├── 📁 src/                 → C++ source files
+│   ├── main.cpp            → Engine entry point
+│   ├── matching_engine.cpp → Matching algorithm logic
+│   └── ...
+│
+├── 📁 python_server/       → WebSocket backend
+│   ├── server.py           → FastAPI + WebSocket server
+│   └── requirements.txt    → Python dependencies
+│
+├── 📁 node_server/         → Frontend + optional Node integration
+│   ├── public/index.html   → User dashboard
+│   ├── package.json        → NPM setup
+│   └── ...
+│
+├── 📄 CMakeLists.txt       → Build config for C++
+└── 📄 matching_engine.exe  → Compiled binary
+
+
+### ⚡ Performance and Design Philosophy
+
+This matching engine is designed for low latency, modularity, and real-time responsiveness. The C++ core ensures lightning-fast trade matching, while Python manages scalability and concurrent data flow. The web interface offers accessibility and live visualization.
+
+By combining C++ for performance, Python for orchestration, and JavaScript for user experience, this project achieves the same architectural balance used in professional trading systems. Every component can evolve independently, allowing future developers to extend it into production-scale systems.
+
+### 🧭 Future Vision
+
+Expand into a multi-threaded distributed engine.
+
+Integrate database persistence for order and trade history.
+
+Add graphical analytics (candlestick charts, market depth graphs).
+
+Support advanced order types (Iceberg, Trailing Stop, Conditional Orders).
+
+Upgrade Python into a hybrid REST + WebSocket API system.
+
 
