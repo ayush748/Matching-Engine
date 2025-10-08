@@ -1,11 +1,18 @@
-cmake_minimum_required(VERSION 3.10)
-project(MatchingEngine)
+cmake_minimum_required(VERSION 3.20)
+project(MatchingEnginePython)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(include)
+# Find pybind11
+find_package(pybind11 REQUIRED)
 
-file(GLOB SOURCES "src/*.cpp")
+# Source files
+set(SOURCES
+    src/matching_engine.cpp
+    src/order_book.cpp
+    src/order.cpp
+    src/trade.cpp
+    python_binding.cpp
+)
 
-add_executable(matching_engine ${SOURCES})
+pybind11_add_module(matching_engine ${SOURCES})

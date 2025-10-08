@@ -1,259 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Matching Engine Demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matching Engine Dashboard</title>
 <style>
-    :root {
-        --buy-color: #0ecb81;
-        --sell-color: #f6465d;
-        --primary: #2172e5;
-        --bg: #0d1117;
-        --card-bg: #161b22;
-        --text: #e6edf3;
-        --border: #30363d;
-    }
+  /* ----- Global Styles ----- */
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #0b0d17;
+    color: #fff;
+  }
 
-    body {
-        font-family: "Poppins", Arial, sans-serif;
-        background: var(--bg);
-        margin: 0;
-        padding: 20px;
-        color: var(--text);
-    }
+  header {
+    background: #131722;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #f0b90b;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #2f2f2f;
+  }
 
-    h1 {
-        text-align: center;
-        color: var(--primary);
-        font-weight: 600;
-        margin-bottom: 20px;
-        letter-spacing: 0.5px;
-    }
+  main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
 
-    #dashboard {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        justify-content: center;
-        align-items: flex-start;
-    }
+  .panel {
+    background: #1b1e2a;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 300px;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    border: 1px solid #2f2f2f;
+    transition: transform 0.2s;
+  }
 
-    .card {
-        background: var(--card-bg);
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-        border: 1px solid var(--border);
-        transition: transform 0.2s ease;
-    }
+  .panel:hover {
+    transform: translateY(-3px);
+  }
 
-    .card:hover {
-        transform: translateY(-2px);
-    }
+  .panel h2 {
+    margin-top: 0;
+    font-size: 18px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    color: #f0b90b;
+  }
 
-    #bbo {
-        flex: 1;
-        min-width: 240px;
-        text-align: center;
-    }
+  /* ----- BBO Panel ----- */
+  .bbo {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
 
-    #bbo h3 {
-        margin-bottom: 10px;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #ccc;
-    }
+  .bbo div {
+    flex: 1;
+    background: #232634;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #2f2f2f;
+  }
 
-    .bbo-value {
-        font-size: 1.3rem;
-        font-weight: bold;
-        margin: 6px 0;
-        display: block;
-    }
+  .bbo div span {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
 
-    #bestBid {
-        color: var(--buy-color);
-    }
+  /* ----- Form Panel ----- */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #232634;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #2f2f2f;
+  }
 
-    #bestAsk {
-        color: var(--sell-color);
-    }
+  form label {
+    font-size: 14px;
+    color: #bbb;
+  }
 
-    #orderPanel {
-        flex: 1;
-        min-width: 280px;
-    }
+  form input, form select, form button {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+  }
 
-    form label {
-        display: block;
-        margin: 10px 0 6px;
-        font-weight: 500;
-        font-size: 0.9rem;
-        color: #bbb;
-    }
+  form input, form select {
+    background: #1b1e2a;
+    color: #fff;
+    border: 1px solid #2f2f2f;
+  }
 
-    form input,
-    form select {
-        padding: 8px 10px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        width: 100%;
-        font-size: 0.95rem;
-        background: #0d1117;
-        color: var(--text);
-        transition: border 0.2s ease;
-    }
+  form button {
+    background: #f0b90b;
+    color: #0b0d17;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    border: none;
+  }
 
-    form input:focus,
-    form select:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 6px rgba(33,114,229,0.4);
-    }
+  form button:hover {
+    background: #ffdc6a;
+  }
 
-    button {
-        margin-top: 14px;
-        width: 100%;
-        padding: 10px;
-        cursor: pointer;
-        border: none;
-        border-radius: 8px;
-        background: var(--primary);
-        color: white;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: background 0.3s ease;
-    }
+  /* ----- Trades Panel ----- */
+  .trade-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    font-family: monospace;
+    font-size: 13px;
+  }
 
-    button:hover {
-        background: #1a5ac7;
-    }
+  .buy { color: #00b894; }
+  .sell { color: #d63031; }
 
-    .recent-trades-title {
-        margin-top: 30px;
-        color: #bbb;
-    }
+  .trades-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
 
-    #trades {
-        max-height: 280px;
-        overflow-y: auto;
-        border: 1px solid var(--border);
-        padding: 10px 12px;
-        background: var(--card-bg);
-        border-radius: 10px;
-        margin-top: 20px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    }
+  /* ----- Scrollbars ----- */
+  .trades-list::-webkit-scrollbar,
+  .panel::-webkit-scrollbar {
+    width: 6px;
+  }
 
-    .trade-entry {
-        padding: 6px 8px;
-        margin-bottom: 6px;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        background: #1c2128;
-        border-left: 4px solid transparent;
-    }
+  .trades-list::-webkit-scrollbar-thumb,
+  .panel::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+  }
 
-    .trade-entry.buy {
-        border-left-color: var(--buy-color);
-        color: var(--buy-color);
+  /* ----- Responsive ----- */
+  @media(max-width: 900px){
+    main {
+      flex-direction: column;
     }
-
-    .trade-entry.sell {
-        border-left-color: var(--sell-color);
-        color: var(--sell-color);
-    }
-
-    .trade-entry:last-child {
-        margin-bottom: 0;
-    }
+  }
 </style>
 </head>
 <body>
-    <h1>⚡ Matching Engine Dashboard</h1>
 
-    <div id="dashboard">
-        <div id="bbo" class="card">
-            <h3>Best Bid / Ask</h3>
-            <span id="bestBid" class="bbo-value">-</span>
-            <span id="bestAsk" class="bbo-value">-</span>
-        </div>
+<header>Matching Engine Dashboard</header>
 
-        <div id="orderPanel" class="card">
-            <h3>Place New Order</h3>
-            <form id="orderForm">
-                <label>Side:</label>
-                <select id="side" title="Order Side">
-                    <option value="BUY">BUY</option>
-                    <option value="SELL">SELL</option>
-                </select>
-
-                <label>Price:</label>
-                <input id="price" type="number" value="30000" step="0.01" title="Order Price" placeholder="Enter price" />
-
-                <label>Quantity:</label>
-                <input id="qty" type="number" value="0.01" step="0.01" title="Order Quantity" placeholder="Enter quantity" />
-
-                <button type="submit">Submit Order</button>
-            </form>
-        </div>
+<main>
+  <!-- Best Bid/Ask -->
+  <div class="panel">
+    <h2>BBO</h2>
+    <div class="bbo">
+      <div>Best Bid <span id="bestBid">0</span></div>
+      <div>Best Ask <span id="bestAsk">0</span></div>
     </div>
+  </div>
 
-    <h3 class="recent-trades-title">📜 Recent Trades</h3>
-    <div id="trades"></div>
+  <!-- Order Form -->
+  <div class="panel">
+    <h2>Place Order</h2>
+    <form id="orderForm">
+      <label for="side">Side:</label>
+      <select id="side">
+        <option>BUY</option>
+        <option>SELL</option>
+      </select>
+
+      <label for="price">Price:</label>
+      <input type="number" id="price" step="0.01" required>
+
+      <label for="qty">Quantity:</label>
+      <input type="number" id="qty" step="0.01" required>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </div>
+
+  <!-- Trades Panel -->
+  <div class="panel">
+    <h2>Recent Trades</h2>
+    <div class="trades-list" id="trades"></div>
+  </div>
+</main>
 
 <script>
-const ws = new WebSocket('ws://' + location.hostname + ':5500');
+const ws = new WebSocket("ws://localhost:5500/ws");
 
-ws.onopen = () => console.log('✅ WebSocket connected');
 ws.onmessage = (evt) => {
-    try {
-        const data = JSON.parse(evt.data);
-        console.log('📩 WS Data:', data);
+    const data = JSON.parse(evt.data);
 
-        // Update BBO
-        if (data.bestBid !== undefined && data.bestAsk !== undefined) {
-            document.getElementById('bestBid').innerText = data.bestBid.toFixed(2);
-            document.getElementById('bestAsk').innerText = data.bestAsk.toFixed(2);
-        }
+    if(data.bestBid !== undefined) document.getElementById('bestBid').innerText = data.bestBid;
+    if(data.bestAsk !== undefined) document.getElementById('bestAsk').innerText = data.bestAsk;
 
-        // Update trades
-        if (data.type === 'trades' && Array.isArray(data.trades)) {
-            const tradesDiv = document.getElementById('trades');
-            data.trades.forEach(t => {
-                const el = document.createElement('div');
-                el.className = 'trade-entry ' + (t.aggressor_side?.toLowerCase() || '');
-                el.innerText = `[${t.trade_id}] ${t.symbol} ${t.quantity}@${t.price} (${t.aggressor_side})`;
-                tradesDiv.prepend(el);
-            });
-        }
-    } catch (e) {
-        console.error('❌ WebSocket parse error', e);
+    if(data.type === 'trades') {
+        const tradesDiv = document.getElementById('trades');
+        data.trades.forEach(t => {
+            const el = document.createElement('div');
+            el.className = 'trade-entry ' + t.aggressor_side.toLowerCase();
+            el.innerText = `[${t.trade_id}] ${t.symbol} ${t.quantity}@${t.price} (${t.aggressor_side})`;
+            tradesDiv.prepend(el);
+        });
     }
 };
 
 document.getElementById('orderForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const side = document.getElementById('side').value;
-    const price = parseFloat(document.getElementById('price').value);
-    const qty = parseFloat(document.getElementById('qty').value);
+    const order = {
+        id: Date.now(),
+        symbol: 'BTC-USDT',
+        side: document.getElementById('side').value,
+        type: 'LIMIT',
+        price: parseFloat(document.getElementById('price').value),
+        quantity: parseFloat(document.getElementById('qty').value)
+    };
 
-    const body = { id: Date.now(), symbol: 'BTC-USDT', side, type: 'LIMIT', price, quantity: qty };
-
-    try {
-        const res = await fetch('/submit_order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
-        });
-        const json = await res.json();
-        console.log('✅ Order submitted:', json);
-    } catch (err) {
-        console.error('❌ Order submission failed:', err);
-        alert('Failed to submit order');
-    }
+    await fetch('/submit_order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(order)
+    });
 });
 </script>
+
 </body>
 </html>

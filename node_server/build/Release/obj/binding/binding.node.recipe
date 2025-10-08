@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\matching_engine\node_server\build\Release\binding.node</FullPath>
+      <FullPath>D:\Matching-Engine\node_server\build\Release\binding.node</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
